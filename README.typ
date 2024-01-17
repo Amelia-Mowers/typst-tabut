@@ -50,7 +50,7 @@
 
 = Tabut
 
-_Powerfull, Simple, Concise_
+_Powerful, Simple, Concise_
 
 A Typst plugin for turning data into tables.
 
