@@ -1,0 +1,41 @@
+name: Generate README
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+    paths-ignore:
+      - 'README.md'
+      - 'README.pdf'
+      - 'doc/compiled-snippets/**'
+  pull_request:
+    branches: [ "main" ]
+    paths-ignore:
+      - 'README.md'
+      - 'README.pdf'
+      - 'doc/compiled-snippets/**'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      - uses: extractions/setup-just@v1
+
+      - name: Compile Readme
+        run: just build
+
+      - name: Commit and Push README
+        run: |
+          git config --local user.email "github-actions[bot]@github.com"
+          git config --local user.name "github-actions[bot]"
+          git add --force README.md
+          git add --force doc/compiled-snippets/
+          git commit -m "Update README by GitHub Action"
+          git push
