@@ -30,7 +30,7 @@ for file in "$TMP_DIR"/*.typ; do
         temp_file="$TMP_DIR/$filename.temp"
 
         # Prepend the required string to the new temp file
-        echo "#set page(width: auto, height: auto, margin: 2pt)" > "$temp_file"
+        echo "#set page(background: box(width: 100%, height: 100%, fill: luma(97%)), width: auto, height: auto, margin: 2pt)" > "$temp_file"
 
         # Append the contents of the original file to the new temp file
         cat "$file" >> "$temp_file"
