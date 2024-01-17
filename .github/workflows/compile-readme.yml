@@ -27,6 +27,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       - uses: extractions/setup-just@v1
+      - uses: typst-community/setup-typst@v2.0.1
+      - uses: maxheld83/pandoc-action@v2
 
       - name: Compile Readme
         run: just build
