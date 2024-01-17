@@ -43,3 +43,5 @@ jobs:
           git add --force doc/compiled-snippets/
           git commit -m "Update README by GitHub Action"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
