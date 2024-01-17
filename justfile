@@ -1,6 +1,6 @@
 build: local-pub compile-snippets
     typst compile README.typ README.pdf 
-    pandoc -t html -o README.md README.typ
+    pandoc -t gfm -o README.md README.typ
 
 local-pub:
     sh local-pub.bash
