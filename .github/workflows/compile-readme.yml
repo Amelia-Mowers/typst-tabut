@@ -33,7 +33,10 @@ jobs:
       - uses: typst-community/setup-typst@v3
 
       - name: Install Pandoc
-        run: sudo apt-get update && sudo apt-get install -y pandoc
+        run: |
+          wget https://github.com/jgm/pandoc/releases/download/3.1.11/pandoc-3.1.11-linux-arm64.tar.gz
+          tar xvzf pandoc-3.1.11-linux-arm64.tar.gz
+          sudo mv pandoc-3.1.11/bin/pandoc /usr/local/bin
 
       - name: Compile Readme
         run: just build
