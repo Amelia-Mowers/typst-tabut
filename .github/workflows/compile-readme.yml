@@ -46,6 +46,7 @@ jobs:
           git config --local user.email "github-actions[bot]@github.com"
           git config --local user.name "github-actions[bot]"
           git add --force README.md
+          git add --force README.pdf
           git add --force doc/compiled-snippets/
           git commit -m "Update README by GitHub Action"
           git push
