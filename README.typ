@@ -42,25 +42,112 @@
   #ex(raw(content, block: true, lang: "typ"))
 ]}
 
-#let section(content) = {
+#let no-break(content) = {
   block(breakable: false, width:100%, content)
 }
 
-#section([
+#let subsection(name) = {
+  [== #name ]
+}
 
-= Tabut
+#let stringify-by-func(it) = {
+  let func = it.func()
+  return if func in (parbreak, pagebreak, linebreak) {
+    "\n"
+  } else if func == smartquote {
+    if it.double { "\"" } else { "'" } // "
+  } else if it.fields() == (:) {
+    // a fieldless element is either specially represented (and caught earlier) or doesn't have text
+    ""
+  } else {
+    panic("Not sure how to handle type `" + repr(func) + "`")
+  }
+}
+
+#let plain-text(it) = {
+  return if type(it) == str {
+    it
+  } else if it == [ ] {
+    " "
+  } else if it.has("children") {
+    it.children.map(plain-text).join()
+  } else if it.has("body") {
+    plain-text(it.body)
+  } else if it.has("text") {
+    it.text
+  } else {
+    stringify-by-func(it)
+  }
+}
+
+#let section(name) = {
+  [= #name #label(name.text.replace(" ", "-"))]
+}
+
+#let subsection(name) = {
+  [== #name #label(name.text.replace(" ", "-"))]
+}
+
+#no-break([
+
+#section([Tabut])
 
 _Powerful, Simple, Concise_
 
 A Typst plugin for turning data into tables.
 
-])#section([
+== Outline
 
-= Examples
+#set list(marker: ([•], [◦]))
 
-]) #section([
+#let sections = (
+  (name: [Examples], subs: (
+    [Input Format and Creation],
+    [Basic Table],
+    [Table Styling],
+    [Label Formatting],
+    [Cell Expressions and Formatting],
+    [Index],
+    [Transpose],
+    [Alignment],
+    [Column Width],
+  )),
+  (name: [Data Operation Examples], subs: (
+    [CSV Data],
+    [Slice],
+    [Sorting and Reversing],
+    [Filter],
+    [Aggregation using Map and Sum],
+    [Grouping]
+  )),
+)
 
-== Input Format and Creation
+#{
+  let items = ();
+  for s in sections {
+    let s-items = ();
+    for ss in s.subs {
+      s-items.push(link(label(ss.text.replace(" ", "-")), ss));
+    }
+    items.push([
+      #link(label(s.name.text.replace(" ", "-")), s.name)
+      #list(..s-items)
+    ])
+  }
+  list(..items)
+}
+
+]) 
+
+#pagebreak(weak: true)
+
+#no-break([
+
+#section([Examples])
+
+]) #no-break([
+
+#subsection([Input Format and Creation])
 
 The `tabut` function takes input in "record" format, an array of dictionaries, with each dictionary representing a single "object" or "record".
 
@@ -68,9 +155,9 @@ In the example below, each record is a listing for an office supply product.
 
 #snippet-quiet("example-data/supplies")
 
-]) #section([
+]) #no-break([
 
-== Basic Table
+#subsection([Basic Table])
 
 Now create a basic table from the data. 
 
@@ -79,7 +166,7 @@ Now create a basic table from the data.
 `funct` takes a function which generates content for a given cell corrosponding to the defined column for each record. 
 `r` is the record, so `r => r.name` returns the `name` property of each record in the input data if it has one.
 
-]) #section([
+]) #no-break([
 
 The philosphy of `tabut` is that the display of data should be simple and clearly defined, 
 therefore each column and it's content and formatting should be defined within a single clear column defintion.
@@ -87,67 +174,67 @@ One consequence is you can comment out, remove or move, any column easily, for e
 
 #snippet("rearrange")
 
-]) #section([
+]) #no-break([
 
-== Table Styling
+#subsection([Table Styling])
 
 Any default Table style options can be tacked on and are passed to the final table function.
 
 #snippet("styling")
 
-]) #section([
+]) #no-break([
 
-== Label Formatting
+#subsection([Label Formatting])
 
 You can pass any content or expression into the label property.
 
 #snippet("title")
 
-]) #section([
+]) #no-break([
 
-== Cell Expressions and Formatting
+#subsection([Cell Expressions and Formatting])
 
 Just like the labels cell contents can be modified and formatted like any content in Typst.
 
 #snippet("format")
 
-]) #section([
+]) #no-break([
 
 You can have the cell content function do calculations on a record property.
 
 #snippet("calculation")
 
-]) #section([
+]) #no-break([
 
 Or even combine multiple record properties, go wild.
 
 #snippet("combine")
 
-]) #section([
+]) #no-break([
 
-== Index
+#subsection([Index])
 
 `tabut` automatically adds an `_index` property to each record.
 
 #snippet("index")
 
-]) #section([
+]) #no-break([
 
-== Transpose
+#subsection([Transpose])
 
 This was annoying to implement, and I don't know when you'd actually use this, but here.
 
 #snippet("transpose")
 
-]) #section([
+]) #no-break([
 
-== Alignment
+#subsection([Alignment])
 
 #snippet("align")
 
-]) #section([
+]) #no-break([
 
-== Column Width
+#subsection([Column Width])
 
 #snippet("width")
 
@@ -155,17 +242,17 @@ This was annoying to implement, and I don't know when you'd actually use this, b
 
 #pagebreak(weak: true)
 
-#section([
+#no-break([
 
-= Data Operation Examples
+#section([Data Operation Examples])
 
 While technically seperate from table display, the following are examples of how to perform operations on data before it is displayed with `tabut`.
 
 Since `tabut` assumes an "array of dictionaries" format, then most data operations can be performed easily with Typst's native array functions. `tabut` also provides several functions to provide additional functionality.
 
-]) #section([
+]) #no-break([
 
-== CSV data
+#subsection([CSV Data])
 
 By default, imported CSV gives a "rows" or "array of arrays" data format, which can not be directly used by `tabut`.
 To convert, `tabut` includes a function `rows-to-records` demonstrated below.
@@ -180,33 +267,33 @@ Imported CSV data are all strings, so it's usefull to convert them to `int` or `
 
 #snippet-quiet("import-csv-easy")
 
-]) #section([
+]) #no-break([
 
-== `slice`
+#subsection([Slice])
 
 #snippet("slice")
 
-]) #section([
+]) #no-break([
 
-== Sorting and Reversing
+#subsection([Sorting and Reversing])
 
 #snippet("sort")
 
-]) #section([
+]) #no-break([
 
-== `filter`
+#subsection([Filter])
 
 #snippet("filter")
 
-]) #section([
+]) #no-break([
 
-== Aggregation using `map` and `sum`
+#subsection([Aggregation using Map and Sum])
 
 #snippet("aggregation")
 
-]) #section([
+]) #no-break([
 
-== Grouping
+#subsection([Grouping])
 
 #snippet("group")
 
