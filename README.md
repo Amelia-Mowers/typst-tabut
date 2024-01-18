@@ -1,22 +1,58 @@
 <div>
 
-# Tabut
+# Tabut <span id="Tabut"></span>
 
 *Powerful, Simple, Concise*
 
 A Typst plugin for turning data into tables.
 
+## Outline
+
+- [Examples](#Examples)
+
+  - [Input Format and Creation](#Input-Format-and-Creation)
+
+  - [Basic Table](#Basic-Table)
+
+  - [Table Styling](#Table-Styling)
+
+  - [Label Formatting](#Label-Formatting)
+
+  - [Cell Expressions and Formatting](#Cell-Expressions-and-Formatting)
+
+  - [Index](#Index)
+
+  - [Transpose](#Transpose)
+
+  - [Alignment](#Alignment)
+
+  - [Column Width](#Column-Width)
+
+- [Data Operation Examples](#Data-Operation-Examples)
+
+  - [CSV Data](#CSV-Data)
+
+  - [Slice](#Slice)
+
+  - [Sorting and Reversing](#Sorting-and-Reversing)
+
+  - [Filter](#Filter)
+
+  - [Aggregation using Map and Sum](#Aggregation-using-Map-and-Sum)
+
+  - [Grouping](#Grouping)
+
 </div>
 
 <div>
 
-# Examples
+# Examples <span id="Examples"></span>
 
 </div>
 
 <div>
 
-## Input Format and Creation
+## Input Format and Creation <span id="Input-Format-and-Creation"></span>
 
 The `tabut` function takes input in “record” format, an array of
 dictionaries, with each dictionary representing a single “object” or
@@ -41,7 +77,7 @@ product.
 
 <div>
 
-## Basic Table
+## Basic Table <span id="Basic-Table"></span>
 
 Now create a basic table from the data.
 
@@ -118,7 +154,7 @@ style="width:2.58903in;height:1.01335in" />
 
 <div>
 
-## Table Styling
+## Table Styling <span id="Table-Styling"></span>
 
 Any default Table style options can be tacked on and are passed to the
 final table function.
@@ -154,7 +190,7 @@ style="width:2.24804in;height:1.01335in" />
 
 <div>
 
-## Label Formatting
+## Label Formatting <span id="Label-Formatting"></span>
 
 You can pass any content or expression into the label property.
 
@@ -196,7 +232,7 @@ style="width:3.14555in;height:1.05075in" />
 
 <div>
 
-## Cell Expressions and Formatting
+## Cell Expressions and Formatting <span id="Cell-Expressions-and-Formatting"></span>
 
 Just like the labels cell contents can be modified and formatted like
 any content in Typst.
@@ -305,7 +341,7 @@ style="width:1.6171in;height:1.01133in" />
 
 <div>
 
-## Index
+## Index <span id="Index"></span>
 
 `tabut` automatically adds an `_index` property to each record.
 
@@ -339,7 +375,7 @@ style="width:1.31304in;height:1.01133in" />
 
 <div>
 
-## Transpose
+## Transpose <span id="Transpose"></span>
 
 This was annoying to implement, and I don’t know when you’d actually use
 this, but here.
@@ -378,7 +414,7 @@ style="width:3.57327in;height:1.01335in" />
 
 <div>
 
-## Alignment
+## Alignment <span id="Alignment"></span>
 
 <div>
 
@@ -413,7 +449,7 @@ style="width:2.56141in;height:1.01133in" />
 
 <div>
 
-## Column Width
+## Column Width <span id="Column-Width"></span>
 
 <div>
 
@@ -452,7 +488,7 @@ style="width:4.22222in;height:1.01133in" />
 
 <div>
 
-# Data Operation Examples
+# Data Operation Examples <span id="Data-Operation-Examples"></span>
 
 While technically seperate from table display, the following are
 examples of how to perform operations on data before it is displayed
@@ -467,7 +503,7 @@ functionality.
 
 <div>
 
-## CSV data
+## CSV Data <span id="CSV-Data"></span>
 
 By default, imported CSV gives a “rows” or “array of arrays” data
 format, which can not be directly used by `tabut`. To convert, `tabut`
@@ -537,7 +573,7 @@ perform this process.
 
 <div>
 
-## `slice`
+## Slice <span id="Slice"></span>
 
 <div>
 
@@ -581,7 +617,7 @@ style="width:5.33036in;height:1.49023in" />
 
 <div>
 
-## Sorting and Reversing
+## Sorting and Reversing <span id="Sorting-and-Reversing"></span>
 
 <div>
 
@@ -619,7 +655,7 @@ style="width:4.40184in;height:1.49023in" />
 
 <div>
 
-## `filter`
+## Filter <span id="Filter"></span>
 
 <div>
 
@@ -656,7 +692,7 @@ style="width:5.33036in;height:1.49023in" />
 
 <div>
 
-## Aggregation using `map` and `sum`
+## Aggregation using Map and Sum <span id="Aggregation-using-Map-and-Sum"></span>
 
 <div>
 
@@ -685,7 +721,7 @@ style="width:1.73668in;height:0.53445in" />
 
 <div>
 
-## Grouping
+## Grouping <span id="Grouping"></span>
 
 <div>
 
