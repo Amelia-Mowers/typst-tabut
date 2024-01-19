@@ -1,11 +1,4 @@
 #let tabut(data-raw, colDefs, ..tableArgs) = {
-  // TODO: handle cols/alignment being defined in the table args and colDefs
-  // TODO: tablex integration?
-  // TODO: Short hand for if you want a col just to be the function as a property?
-  // TODO: Default formatting?
-  // TODO: auto table generation?
-  // TODO: turn off adding index
-  // TODO: short hand col definitions
 
   let posArgs = tableArgs.pos();
   let namedArgs = tableArgs.named();
@@ -79,7 +72,6 @@
 }
 
 #let rows-to-records(headers, rows) = {
-  // TODO: Add optional default for cells without values?
   rows.map(r => {
     let record = (:);
     let i = 0;
