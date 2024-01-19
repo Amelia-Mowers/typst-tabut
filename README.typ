@@ -105,7 +105,8 @@ A Typst plugin for turning data into tables.
     [Input Format and Creation],
     [Basic Table],
     [Table Styling],
-    [Label Formatting],
+    [Header Formatting],
+    [Remove Headers],
     [Cell Expressions and Formatting],
     [Index],
     [Transpose],
@@ -189,6 +190,14 @@ Any default Table style options can be tacked on and are passed to the final tab
 You can pass any content or expression into the header property.
 
 #snippet("title")
+
+]) #no-break([
+
+#subsection([Remove Headers])
+
+You can prevent from being generated with the `headers` paramater. This is useful with the `tabut-cells` function as demonstrated in it's section.
+
+#snippet("no-headers")
 
 ]) #no-break([
 

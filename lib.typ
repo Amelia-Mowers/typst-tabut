@@ -76,8 +76,8 @@
     ..tabut-cells(
       data-raw, 
       colDefs, 
-      transpose: false,
-      headers: true,
+      headers: headers,
+      transpose: transpose,
       ),
     ..tableArgs
   )
