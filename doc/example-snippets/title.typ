@@ -11,9 +11,9 @@
 #tabut(
   supplies,
   ( 
-    (label: fmt([Name]), func: r => r.name ), 
-    (label: fmt([Price]), func: r => r.price), 
-    (label: fmt([Quantity]), func: r => r.quantity), 
+    (header: fmt([Name]), func: r => r.name ), 
+    (header: fmt([Price]), func: r => r.price), 
+    (header: fmt([Quantity]), func: r => r.quantity), 
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none

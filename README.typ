@@ -184,9 +184,9 @@ Any default Table style options can be tacked on and are passed to the final tab
 
 ]) #no-break([
 
-#subsection([Label Formatting])
+#subsection([Header Formatting])
 
-You can pass any content or expression into the label property.
+You can pass any content or expression into the header property.
 
 #snippet("title")
 
@@ -194,7 +194,7 @@ You can pass any content or expression into the label property.
 
 #subsection([Cell Expressions and Formatting])
 
-Just like the labels cell contents can be modified and formatted like any content in Typst.
+Just like the headers, cell contents can be modified and formatted like any content in Typst.
 
 #snippet("format")
 

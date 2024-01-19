@@ -5,10 +5,10 @@
 #tabut(
   supplies,
   ( // Include `align` as an optional arg to a column def
-    (label: [*\#*], func: r => r._index),
-    (label: [*Name*], align: right, func: r => r.name), 
-    (label: [*Price*], align: right, func: r => usd(r.price)), 
-    (label: [*Quantity*], align: right, func: r => r.quantity),
+    (header: [*\#*], func: r => r._index),
+    (header: [*Name*], align: right, func: r => r.name), 
+    (header: [*Price*], align: right, func: r => usd(r.price)), 
+    (header: [*Quantity*], align: right, func: r => r.quantity),
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none

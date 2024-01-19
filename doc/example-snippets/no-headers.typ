@@ -3,11 +3,9 @@
 
 #tabut(
   supplies,
-  ( 
+  (
     (header: [Name], func: r => r.name), 
     (header: [Price], func: r => r.price), 
-    (header: [Quantity], func: r => r.quantity),
-  ),
-  fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
-  stroke: none
+    (header: [Quantity], func: r => r.quantity), 
+  )
 )

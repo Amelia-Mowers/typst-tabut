@@ -5,10 +5,10 @@
 #tabut(
   group(titanic, r => r.Pclass),
   (
-    (label: [*Class*], func: r => classes.at(r.value)), 
-    (label: [*Total Fare*], func: r => usd(r.group.map(r => r.Fare).sum())), 
+    (header: [*Class*], func: r => classes.at(r.value)), 
+    (header: [*Total Fare*], func: r => usd(r.group.map(r => r.Fare).sum())), 
     (
-      label: [*Avg Fare*], 
+      header: [*Avg Fare*], 
       func: r => usd(r.group.map(r => r.Fare).sum() / r.group.len())
     ), 
   ),

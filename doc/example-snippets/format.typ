@@ -5,8 +5,8 @@
 #tabut(
   supplies,
   ( 
-    (label: [*Name*], func: r => r.name ), 
-    (label: [*Price*], func: r => usd(r.price)), 
+    (header: [*Name*], func: r => r.name ), 
+    (header: [*Price*], func: r => usd(r.price)), 
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none

@@ -5,10 +5,10 @@
   supplies, // the source of the data used to generate the table
   ( // column definitions
     (
-      label: [Name], // label, takes content.
+      header: [Name], // label, takes content.
       func: r => r.name // generates the cell content.
     ), 
-    (label: [Price], func: r => r.price), 
-    (label: [Quantity], func: r => r.quantity), 
+    (header: [Price], func: r => r.price), 
+    (header: [Quantity], func: r => r.quantity), 
   )
 )

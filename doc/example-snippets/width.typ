@@ -7,10 +7,10 @@
   tabut(
     supplies,
     ( // Include `width` as an optional arg to a column def
-      (label: [*\#*], func: r => r._index),
-      (label: [*Name*], width: 1fr, func: r => r.name), 
-      (label: [*Price*], width: 20%, func: r => usd(r.price)), 
-      (label: [*Quantity*], width: 1.5in, func: r => r.quantity),
+      (header: [*\#*], func: r => r._index),
+      (header: [*Name*], width: 1fr, func: r => r.name), 
+      (header: [*Price*], width: 20%, func: r => usd(r.price)), 
+      (header: [*Quantity*], width: 1.5in, func: r => r.quantity),
     ),
     fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
     stroke: none,

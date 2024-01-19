@@ -4,8 +4,8 @@
 #tabut(
   supplies,
   ( 
-    (label: [*\#*], func: r => r._index),
-    (label: [*Name*], func: r => r.name ), 
+    (header: [*\#*], func: r => r._index),
+    (header: [*Name*], func: r => r.name ), 
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none

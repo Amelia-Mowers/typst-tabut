@@ -7,10 +7,10 @@
   .filter(r => r.Pclass == 1)
   .slice(0, 5),
   ( 
-    (label: [*Name*], func: r => r.Name), 
-    (label: [*Class*], func: r => classes.at(r.Pclass)),
-    (label: [*Fare*], func: r => usd(r.Fare)), 
-    (label: [*Survived?*], func: r => ("No", "Yes").at(r.Survived)), 
+    (header: [*Name*], func: r => r.Name), 
+    (header: [*Class*], func: r => classes.at(r.Pclass)),
+    (header: [*Fare*], func: r => usd(r.Fare)), 
+    (header: [*Survived?*], func: r => ("No", "Yes").at(r.Survived)), 
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none

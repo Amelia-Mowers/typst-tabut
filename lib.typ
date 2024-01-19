@@ -1,13 +1,9 @@
-#let tabut(data-raw, colDefs, ..tableArgs) = {
-
-  let posArgs = tableArgs.pos();
-  let namedArgs = tableArgs.named();
-
-  let transpose = false;
-
-  if namedArgs.at("transpose", default: none) != none {
-    transpose = namedArgs.remove("transpose");
-  }
+#let tabut-cells(
+  data-raw, 
+  colDefs, 
+  transpose: false,
+  headers: true,
+) = {
 
   let data = ();
   let i = 0;
@@ -32,7 +28,7 @@
     }
 
     for colDef in colDefs {
-      entries.push(colDef.label);
+      if headers { entries.push(colDef.header); }
       for record in data {
         entries.push([#(colDef.func)(record)])
       }
@@ -52,7 +48,7 @@
     }
 
     for colDef in colDefs {
-      entries.push(colDef.label);
+      if headers { entries.push(colDef.header); }
     }
 
     for record in data {
@@ -62,12 +58,28 @@
     }
   }
 
-  table(
+  arguments(
     columns: colWidths,
     align: colAlignments,
-    ..posArgs,
-    ..namedArgs,
     ..entries
+  )
+}
+
+#let tabut(
+  data-raw, 
+  colDefs, 
+  transpose: false,
+  headers: true,
+  ..tableArgs
+  ) = {
+  table(
+    ..tabut-cells(
+      data-raw, 
+      colDefs, 
+      transpose: false,
+      headers: true,
+      ),
+    ..tableArgs
   )
 }
 

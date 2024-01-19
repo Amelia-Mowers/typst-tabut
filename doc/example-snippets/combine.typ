@@ -9,8 +9,8 @@
 #tabut(
   employees,
   ( 
-    (label: [*ID*], func: r => r.id ),
-    (label: [*Full Name*], func: r => [#r.first #r.middle.first(), #r.last] ),
+    (header: [*ID*], func: r => r.id ),
+    (header: [*Full Name*], func: r => [#r.first #r.middle.first(), #r.last] ),
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none
