@@ -16,7 +16,9 @@ A Typst plugin for turning data into tables.
 
   - [Table Styling](#Table-Styling)
 
-  - [Label Formatting](#Label-Formatting)
+  - [Header Formatting](#Header-Formatting)
+
+  - [Remove Headers](#Remove-Headers)
 
   - [Cell Expressions and Formatting](#Cell-Expressions-and-Formatting)
 
@@ -91,11 +93,11 @@ Now create a basic table from the data.
   supplies, // the source of the data used to generate the table
   ( // column definitions
     (
-      label: [Name], // label, takes content.
+      header: [Name], // label, takes content.
       func: r => r.name // generates the cell content.
     ), 
-    (label: [Price], func: r => r.price), 
-    (label: [Quantity], func: r => r.quantity), 
+    (header: [Price], func: r => r.price), 
+    (header: [Quantity], func: r => r.quantity), 
   )
 )
 ```
@@ -133,10 +135,10 @@ for example:
 #tabut(
   supplies,
   (
-    (label: [Price], func: r => r.price), // This column is moved to the front
-    (label: [Name], func: r => r.name), 
-    (label: [Name 2], func: r => r.name), // copied
-    // (label: [Quantity], func: r => r.quantity), // removed via comment
+    (header: [Price], func: r => r.price), // This column is moved to the front
+    (header: [Name], func: r => r.name), 
+    (header: [Name 2], func: r => r.name), // copied
+    // (header: [Quantity], func: r => r.quantity), // removed via comment
   )
 )
 ```
@@ -168,9 +170,9 @@ final table function.
 #tabut(
   supplies,
   ( 
-    (label: [Name], func: r => r.name), 
-    (label: [Price], func: r => r.price), 
-    (label: [Quantity], func: r => r.quantity),
+    (header: [Name], func: r => r.name), 
+    (header: [Price], func: r => r.price), 
+    (header: [Quantity], func: r => r.quantity),
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none
@@ -190,9 +192,9 @@ style="width:2.24804in;height:1.01335in" />
 
 <div>
 
-## Label Formatting <span id="Label-Formatting"></span>
+## Header Formatting <span id="Header-Formatting"></span>
 
-You can pass any content or expression into the label property.
+You can pass any content or expression into the header property.
 
 <div>
 
@@ -210,9 +212,9 @@ You can pass any content or expression into the label property.
 #tabut(
   supplies,
   ( 
-    (label: fmt([Name]), func: r => r.name ), 
-    (label: fmt([Price]), func: r => r.price), 
-    (label: fmt([Quantity]), func: r => r.quantity), 
+    (header: fmt([Name]), func: r => r.name ), 
+    (header: fmt([Price]), func: r => r.price), 
+    (header: fmt([Quantity]), func: r => r.quantity), 
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none
@@ -232,9 +234,47 @@ style="width:3.14555in;height:1.05075in" />
 
 <div>
 
+## Remove Headers <span id="Remove-Headers"></span>
+
+You can prevent from being generated with the `headers` paramater. This
+is useful with the `tabut-cells` function as demonstrated in it’s
+section.
+
+<div>
+
+``` typ
+#import "@preview/tabut:0.0.1": tabut
+#import "example-data/supplies.typ": supplies
+
+#tabut(
+  supplies,
+  (
+    (header: [*Name*], func: r => r.name), 
+    (header: [*Price*], func: r => r.price), 
+    (header: [*Quantity*], func: r => r.quantity), 
+  ),
+  headers: false, // Prevents Headers from being generated
+  fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
+  stroke: none,
+)
+```
+
+</div>
+
+<div>
+
+<img src="doc/compiled-snippets/no-headers.svg"
+style="width:1.69109in;height:0.7739in" />
+
+</div>
+
+</div>
+
+<div>
+
 ## Cell Expressions and Formatting <span id="Cell-Expressions-and-Formatting"></span>
 
-Just like the labels cell contents can be modified and formatted like
+Just like the headers, cell contents can be modified and formatted like
 any content in Typst.
 
 <div>
@@ -247,8 +287,8 @@ any content in Typst.
 #tabut(
   supplies,
   ( 
-    (label: [*Name*], func: r => r.name ), 
-    (label: [*Price*], func: r => usd(r.price)), 
+    (header: [*Name*], func: r => r.name ), 
+    (header: [*Price*], func: r => usd(r.price)), 
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none
@@ -281,10 +321,10 @@ property.
 #tabut(
   supplies,
   ( 
-    (label: [*Name*], func: r => r.name ), 
-    (label: [*Price*], func: r => usd(r.price)), 
-    (label: [*Tax*], func: r => usd(r.price * .2)), 
-    (label: [*Total*], func: r => usd(r.price * 1.2)), 
+    (header: [*Name*], func: r => r.name ), 
+    (header: [*Price*], func: r => usd(r.price)), 
+    (header: [*Tax*], func: r => usd(r.price * .2)), 
+    (header: [*Total*], func: r => usd(r.price * 1.2)), 
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none
@@ -320,8 +360,8 @@ Or even combine multiple record properties, go wild.
 #tabut(
   employees,
   ( 
-    (label: [*ID*], func: r => r.id ),
-    (label: [*Full Name*], func: r => [#r.first #r.middle.first(), #r.last] ),
+    (header: [*ID*], func: r => r.id ),
+    (header: [*Full Name*], func: r => [#r.first #r.middle.first(), #r.last] ),
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none
@@ -354,8 +394,8 @@ style="width:1.6171in;height:1.01133in" />
 #tabut(
   supplies,
   ( 
-    (label: [*\#*], func: r => r._index),
-    (label: [*Name*], func: r => r.name ), 
+    (header: [*\#*], func: r => r._index),
+    (header: [*Name*], func: r => r.name ), 
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none
@@ -390,10 +430,10 @@ this, but here.
 #tabut(
   supplies,
   (
-    (label: [*\#*], func: r => r._index),
-    (label: [*Name*], func: r => r.name), 
-    (label: [*Price*], func: r => usd(r.price)), 
-    (label: [*Quantity*], func: r => r.quantity),
+    (header: [*\#*], func: r => r._index),
+    (header: [*Name*], func: r => r.name), 
+    (header: [*Price*], func: r => usd(r.price)), 
+    (header: [*Quantity*], func: r => r.quantity),
   ),
   transpose: true,  // set optional name arg `transpose` to `true`
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
@@ -426,10 +466,10 @@ style="width:3.57327in;height:1.01335in" />
 #tabut(
   supplies,
   ( // Include `align` as an optional arg to a column def
-    (label: [*\#*], func: r => r._index),
-    (label: [*Name*], align: right, func: r => r.name), 
-    (label: [*Price*], align: right, func: r => usd(r.price)), 
-    (label: [*Quantity*], align: right, func: r => r.quantity),
+    (header: [*\#*], func: r => r._index),
+    (header: [*Name*], align: right, func: r => r.name), 
+    (header: [*Price*], align: right, func: r => usd(r.price)), 
+    (header: [*Quantity*], align: right, func: r => r.quantity),
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none
@@ -463,10 +503,10 @@ style="width:2.56141in;height:1.01133in" />
   tabut(
     supplies,
     ( // Include `width` as an optional arg to a column def
-      (label: [*\#*], func: r => r._index),
-      (label: [*Name*], width: 1fr, func: r => r.name), 
-      (label: [*Price*], width: 20%, func: r => usd(r.price)), 
-      (label: [*Quantity*], width: 1.5in, func: r => r.quantity),
+      (header: [*\#*], func: r => r._index),
+      (header: [*Name*], width: 1fr, func: r => r.name), 
+      (header: [*Price*], width: 20%, func: r => usd(r.price)), 
+      (header: [*Quantity*], width: 1.5in, func: r => r.quantity),
     ),
     fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
     stroke: none,
@@ -594,10 +634,10 @@ perform this process.
 #tabut(
   titanic-head,
   ( 
-    (label: [*Name*], func: r => r.Name), 
-    (label: [*Class*], func: r => classes.at(r.Pclass)),
-    (label: [*Fare*], func: r => usd(r.Fare)), 
-    (label: [*Survived?*], func: r => ("No", "Yes").at(r.Survived)), 
+    (header: [*Name*], func: r => r.Name), 
+    (header: [*Class*], func: r => classes.at(r.Pclass)),
+    (header: [*Fare*], func: r => usd(r.Fare)), 
+    (header: [*Survived?*], func: r => ("No", "Yes").at(r.Survived)), 
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none
@@ -632,10 +672,10 @@ style="width:5.33036in;height:1.49023in" />
   .rev()
   .slice(0, 5),
   ( 
-    (label: [*Name*], func: r => r.Name), 
-    (label: [*Class*], func: r => classes.at(r.Pclass)),
-    (label: [*Fare*], func: r => usd(r.Fare)), 
-    (label: [*Survived?*], func: r => ("No", "Yes").at(r.Survived)), 
+    (header: [*Name*], func: r => r.Name), 
+    (header: [*Class*], func: r => classes.at(r.Pclass)),
+    (header: [*Fare*], func: r => usd(r.Fare)), 
+    (header: [*Survived?*], func: r => ("No", "Yes").at(r.Survived)), 
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none
@@ -669,10 +709,10 @@ style="width:4.40184in;height:1.49023in" />
   .filter(r => r.Pclass == 1)
   .slice(0, 5),
   ( 
-    (label: [*Name*], func: r => r.Name), 
-    (label: [*Class*], func: r => classes.at(r.Pclass)),
-    (label: [*Fare*], func: r => usd(r.Fare)), 
-    (label: [*Survived?*], func: r => ("No", "Yes").at(r.Survived)), 
+    (header: [*Name*], func: r => r.Name), 
+    (header: [*Class*], func: r => classes.at(r.Pclass)),
+    (header: [*Fare*], func: r => usd(r.Fare)), 
+    (header: [*Survived?*], func: r => ("No", "Yes").at(r.Survived)), 
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none
@@ -732,8 +772,8 @@ style="width:1.73668in;height:0.53445in" />
 #tabut(
   group(titanic, r => r.Pclass),
   (
-    (label: [*Class*], func: r => classes.at(r.value)), 
-    (label: [*Passengers*], func: r => r.group.len()), 
+    (header: [*Class*], func: r => classes.at(r.value)), 
+    (header: [*Passengers*], func: r => r.group.len()), 
   ),
   fill: (_, row) => if calc.odd(row) { luma(240) } else { luma(220) }, 
   stroke: none
@@ -759,10 +799,10 @@ style="width:1.53415in;height:1.01133in" />
 #tabut(
   group(titanic, r => r.Pclass),
   (
-    (label: [*Class*], func: r => classes.at(r.value)), 
-    (label: [*Total Fare*], func: r => usd(r.group.map(r => r.Fare).sum())), 
+    (header: [*Class*], func: r => classes.at(r.value)), 
+    (header: [*Total Fare*], func: r => usd(r.group.map(r => r.Fare).sum())), 
     (
-      label: [*Avg Fare*], 
+      header: [*Avg Fare*], 
       func: r => usd(r.group.map(r => r.Fare).sum() / r.group.len())
     ), 
   ),
