@@ -30,6 +30,10 @@ A Typst plugin for turning data into tables.
 
   - [Column Width](#Column-Width)
 
+  - [Get Cells Only](#Get-Cells-Only)
+
+  - [Use with Tablex](#Use-with-Tablex)
+
 - [Data Operation Examples](#Data-Operation-Examples)
 
   - [CSV Data](#CSV-Data)
@@ -521,6 +525,84 @@ style="width:2.56141in;height:1.01133in" />
 
 <img src="doc/compiled-snippets/width.svg"
 style="width:4.22222in;height:1.01133in" />
+
+</div>
+
+</div>
+
+<div>
+
+## Get Cells Only <span id="Get-Cells-Only"></span>
+
+<div>
+
+``` typ
+#import "@preview/tabut:0.0.1": tabut-cells
+#import "usd.typ": usd
+#import "example-data/supplies.typ": supplies
+
+#tabut-cells(
+  supplies,
+  ( 
+    (header: [Name], func: r => r.name), 
+    (header: [Price], func: r => usd(r.price)), 
+    (header: [Quantity], func: r => r.quantity),
+  )
+)
+```
+
+</div>
+
+<div>
+
+<img src="doc/compiled-snippets/only-cells.svg"
+style="width:3.36683in;height:2.73299in" />
+
+</div>
+
+</div>
+
+<div>
+
+## Use with Tablex <span id="Use-with-Tablex"></span>
+
+<div>
+
+``` typ
+#import "@preview/tabut:0.0.1": tabut-cells
+#import "usd.typ": usd
+#import "example-data/supplies.typ": supplies
+
+#import "@preview/tablex:0.0.8": tablex, rowspanx, colspanx
+
+#tablex(
+  auto-vlines: false,
+  header-rows: 2,
+
+  /* --- header --- */
+  rowspanx(2)[*Name*], colspanx(2)[*Price*], (), rowspanx(2)[*Quantity*],
+  (),                 [*Base*], [*W/Tax*], (),
+  /* -------------- */
+
+  ..tabut-cells(
+    supplies,
+    ( 
+      (header: [], func: r => r.name), 
+      (header: [], func: r => usd(r.price)), 
+      (header: [], func: r => usd(r.price * 1.3)), 
+      (header: [], func: r => r.quantity),
+    ),
+    headers: false
+  )
+)
+```
+
+</div>
+
+<div>
+
+<img src="doc/compiled-snippets/tablex.svg"
+style="width:2.90837in;height:1.24877in" />
 
 </div>
 
