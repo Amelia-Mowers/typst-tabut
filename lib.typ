@@ -1,6 +1,7 @@
 #let tabut-cells(
   data-raw, 
   colDefs, 
+  index: "_index",
   transpose: false,
   headers: true,
 ) = {
@@ -9,11 +10,11 @@
   let i = 0;
   for record in data-raw {
     let new-record = record;
-    new-record.insert("_index", i)
+    if index != none { new-record.insert(index, i); }
     data.push(new-record);
     i = i + 1;
   }
-    
+
   let entries = ();
   let colWidths = ();
   let colAlignments = ();
@@ -68,6 +69,7 @@
 #let tabut(
   data-raw, 
   colDefs, 
+  index: "_index",
   transpose: false,
   headers: true,
   ..tableArgs
@@ -76,6 +78,7 @@
     ..tabut-cells(
       data-raw, 
       colDefs, 
+      index: index,
       headers: headers,
       transpose: transpose,
       ),
