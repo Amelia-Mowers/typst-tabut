@@ -112,6 +112,8 @@ A Typst plugin for turning data into tables.
     [Transpose],
     [Alignment],
     [Column Width],
+    [Get Cells Only],
+    [Use with Tablex],
   )),
   (name: [Data Operation Examples], subs: (
     [CSV Data],
@@ -246,6 +248,18 @@ This was annoying to implement, and I don't know when you'd actually use this, b
 #subsection([Column Width])
 
 #snippet("width")
+
+]) #no-break([
+
+#subsection([Get Cells Only])
+
+#snippet("only-cells")
+
+]) #no-break([
+
+#subsection([Use with Tablex])
+
+#snippet("tablex")
 
 ]) 
 
