@@ -1,6 +1,8 @@
 #let tabut-cells(
   data-raw, 
   colDefs, 
+  columns: auto,
+  align: auto,
   index: "_index",
   transpose: false,
   headers: true,
@@ -59,16 +61,35 @@
     }
   }
 
+  let output-named = (:)
+
+  if columns == auto {
+    output-named.columns = colWidths;
+  } else if columns == none {
+    // Do nothing
+  } else {
+    output-named.columns = columns;
+  }
+
+  if align == auto {
+    output-named.align = colAlignments;
+  } else if align == none {
+    // Do nothing
+  } else {
+    output-named.align = align;
+  }
+
   arguments(
-    columns: colWidths,
-    align: colAlignments,
+    ..output-named,
     ..entries
-  )
+  );
 }
 
 #let tabut(
   data-raw, 
   colDefs, 
+  columns: auto,
+  align: auto,
   index: "_index",
   transpose: false,
   headers: true,
@@ -78,6 +99,8 @@
     ..tabut-cells(
       data-raw, 
       colDefs, 
+      columns: columns,
+      align: align,
       index: index,
       headers: headers,
       transpose: transpose,

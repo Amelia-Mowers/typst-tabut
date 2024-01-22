@@ -248,11 +248,19 @@ This was annoying to implement, and I don't know when you'd actually use this, b
 
 #snippet("align")
 
+You can also define Alignment manually as in the the standard Table Function.
+
+#snippet("align-manual")
+
 ]) #no-break([
 
 #subsection([Column Width])
 
 #snippet("width")
+
+You can also define Columns manually as in the the standard Table Function.
+
+#snippet("width-manual")
 
 ]) #no-break([
 
