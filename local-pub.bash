@@ -16,8 +16,9 @@ mkdir -p "$DEST_DIR"
 # Clear the contents of the destination directory
 rm -rf "${DEST_DIR:?}"/*
 
-# Copy all contents of the current directory to the destination directory
-cp -r . "$DEST_DIR"
+# Copy all contents of the current directory to the destination directory, excluding .git
+rsync -a --exclude='.git' ./ "$DEST_DIR/"
 
 # Output the operation completion
 echo "Contents copied to $DEST_DIR"
+
