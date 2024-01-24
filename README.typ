@@ -11,14 +11,6 @@
   ])
 }
 
-// #let echo(content, preamble) = {
-//   let evalString = (preamble, content.text).join("\n\n")
-//   [
-//     #ex(content)
-//     #ex(eval(evalString, mode: "code"))
-//   ]
-// }
-
 #let snippet(filename) = {[
   #let snippet-code-path = "doc/example-snippets/" + filename + ".typ"
   #let snippet-image-path = "doc/compiled-snippets/" + filename + ".svg"
@@ -31,8 +23,6 @@
 
   #let content = read(snippet-code-path).replace("\r", "")
   #ex(raw(content, block: true, lang: "typ"))
-  // #ex(include filename)
-
   #ex(image(snippet-image-path, ..size))
 ]}
 
@@ -50,42 +40,16 @@
   [== #name ]
 }
 
-#let stringify-by-func(it) = {
-  let func = it.func()
-  return if func in (parbreak, pagebreak, linebreak) {
-    "\n"
-  } else if func == smartquote {
-    if it.double { "\"" } else { "'" } // "
-  } else if it.fields() == (:) {
-    // a fieldless element is either specially represented (and caught earlier) or doesn't have text
-    ""
-  } else {
-    panic("Not sure how to handle type `" + repr(func) + "`")
-  }
-}
-
-#let plain-text(it) = {
-  return if type(it) == str {
-    it
-  } else if it == [ ] {
-    " "
-  } else if it.has("children") {
-    it.children.map(plain-text).join()
-  } else if it.has("body") {
-    plain-text(it.body)
-  } else if it.has("text") {
-    it.text
-  } else {
-    stringify-by-func(it)
-  }
+#let label-text(content) = {
+  label(content.text.replace(" ", "-"))
 }
 
 #let section(name) = {
-  [= #name #label(name.text.replace(" ", "-"))]
+  [= #name #label-text(name)]
 }
 
 #let subsection(name) = {
-  [== #name #label(name.text.replace(" ", "-"))]
+  [== #name #label-text(name)]
 }
 
 #no-break([
@@ -130,14 +94,14 @@ A Typst plugin for turning data into tables.
   for s in sections {
     let s-items = ();
     for ss in s.subs {
-      s-items.push(link(label(ss.text.replace(" ", "-")), ss));
+      s-items.push(link(label-text(ss), ss));
     }
     items.push([
-      #link(label(s.name.text.replace(" ", "-")), s.name)
+      #link(label-text(s.name), s.name)
       #list(..s-items)
     ])
   }
-  list(..items)
+  list(..items, tight: true)
 }
 
 ]) 
