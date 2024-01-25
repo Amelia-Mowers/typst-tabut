@@ -114,7 +114,7 @@
     let record = (:);
     let i = 0;
     for header in headers {
-      record.insert(header, r.at(i, default));
+      record.insert(header, r.at(i, default: default));
       i = i + 1;
     }
     record
