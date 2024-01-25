@@ -41,7 +41,7 @@
 }
 
 #let label-text(content) = {
-  label(content.text.replace(" ", "-"))
+  label(lower(content.text.replace(" ", "-")))
 }
 
 #let section(name) = {
