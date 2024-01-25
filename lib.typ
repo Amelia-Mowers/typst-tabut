@@ -109,12 +109,12 @@
   )
 }
 
-#let rows-to-records(headers, rows) = {
+#let rows-to-records(headers, rows, default: none) = {
   rows.map(r => {
     let record = (:);
     let i = 0;
     for header in headers {
-      record.insert(header, r.at(i));
+      record.insert(header, r.at(i, default));
       i = i + 1;
     }
     record
