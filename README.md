@@ -1,6 +1,6 @@
 <div>
 
-# Tabut <span id="Tabut"></span>
+# Tabut <span id="tabut"></span>
 
 *Powerful, Simple, Concise*
 
@@ -8,57 +8,57 @@ A Typst plugin for turning data into tables.
 
 ## Outline
 
-- [Examples](#Examples)
+- [Examples](#examples)
 
-  - [Input Format and Creation](#Input-Format-and-Creation)
+  - [Input Format and Creation](#input-format-and-creation)
 
-  - [Basic Table](#Basic-Table)
+  - [Basic Table](#basic-table)
 
-  - [Table Styling](#Table-Styling)
+  - [Table Styling](#table-styling)
 
-  - [Header Formatting](#Header-Formatting)
+  - [Header Formatting](#header-formatting)
 
-  - [Remove Headers](#Remove-Headers)
+  - [Remove Headers](#remove-headers)
 
-  - [Cell Expressions and Formatting](#Cell-Expressions-and-Formatting)
+  - [Cell Expressions and Formatting](#cell-expressions-and-formatting)
 
-  - [Index](#Index)
+  - [Index](#index)
 
-  - [Transpose](#Transpose)
+  - [Transpose](#transpose)
 
-  - [Alignment](#Alignment)
+  - [Alignment](#alignment)
 
-  - [Column Width](#Column-Width)
+  - [Column Width](#column-width)
 
-  - [Get Cells Only](#Get-Cells-Only)
+  - [Get Cells Only](#get-cells-only)
 
-  - [Use with Tablex](#Use-with-Tablex)
+  - [Use with Tablex](#use-with-tablex)
 
-- [Data Operation Examples](#Data-Operation-Examples)
+- [Data Operation Examples](#data-operation-examples)
 
-  - [CSV Data](#CSV-Data)
+  - [CSV Data](#csv-data)
 
-  - [Slice](#Slice)
+  - [Slice](#slice)
 
-  - [Sorting and Reversing](#Sorting-and-Reversing)
+  - [Sorting and Reversing](#sorting-and-reversing)
 
-  - [Filter](#Filter)
+  - [Filter](#filter)
 
-  - [Aggregation using Map and Sum](#Aggregation-using-Map-and-Sum)
+  - [Aggregation using Map and Sum](#aggregation-using-map-and-sum)
 
-  - [Grouping](#Grouping)
-
-</div>
-
-<div>
-
-# Examples <span id="Examples"></span>
+  - [Grouping](#grouping)
 
 </div>
 
 <div>
 
-## Input Format and Creation <span id="Input-Format-and-Creation"></span>
+# Examples <span id="examples"></span>
+
+</div>
+
+<div>
+
+## Input Format and Creation <span id="input-format-and-creation"></span>
 
 The `tabut` function takes input in “record” format, an array of
 dictionaries, with each dictionary representing a single “object” or
@@ -83,7 +83,7 @@ product.
 
 <div>
 
-## Basic Table <span id="Basic-Table"></span>
+## Basic Table <span id="basic-table"></span>
 
 Now create a basic table from the data.
 
@@ -160,7 +160,7 @@ style="width:2.58903in;height:1.01335in" />
 
 <div>
 
-## Table Styling <span id="Table-Styling"></span>
+## Table Styling <span id="table-styling"></span>
 
 Any default Table style options can be tacked on and are passed to the
 final table function.
@@ -196,7 +196,7 @@ style="width:2.24804in;height:1.01335in" />
 
 <div>
 
-## Header Formatting <span id="Header-Formatting"></span>
+## Header Formatting <span id="header-formatting"></span>
 
 You can pass any content or expression into the header property.
 
@@ -238,7 +238,7 @@ style="width:3.14555in;height:1.05075in" />
 
 <div>
 
-## Remove Headers <span id="Remove-Headers"></span>
+## Remove Headers <span id="remove-headers"></span>
 
 You can prevent from being generated with the `headers` paramater. This
 is useful with the `tabut-cells` function as demonstrated in it’s
@@ -276,7 +276,7 @@ style="width:1.69109in;height:0.7739in" />
 
 <div>
 
-## Cell Expressions and Formatting <span id="Cell-Expressions-and-Formatting"></span>
+## Cell Expressions and Formatting <span id="cell-expressions-and-formatting"></span>
 
 Just like the headers, cell contents can be modified and formatted like
 any content in Typst.
@@ -385,7 +385,7 @@ style="width:1.6171in;height:1.01133in" />
 
 <div>
 
-## Index <span id="Index"></span>
+## Index <span id="index"></span>
 
 `tabut` automatically adds an `_index` property to each record.
 
@@ -450,7 +450,7 @@ style="width:1.31304in;height:1.01133in" />
 
 <div>
 
-## Transpose <span id="Transpose"></span>
+## Transpose <span id="transpose"></span>
 
 This was annoying to implement, and I don’t know when you’d actually use
 this, but here.
@@ -489,7 +489,7 @@ style="width:3.57327in;height:1.01335in" />
 
 <div>
 
-## Alignment <span id="Alignment"></span>
+## Alignment <span id="alignment"></span>
 
 <div>
 
@@ -557,7 +557,7 @@ style="width:2.56141in;height:1.01133in" />
 
 <div>
 
-## Column Width <span id="Column-Width"></span>
+## Column Width <span id="column-width"></span>
 
 <div>
 
@@ -633,7 +633,7 @@ style="width:4.22222in;height:1.01133in" />
 
 <div>
 
-## Get Cells Only <span id="Get-Cells-Only"></span>
+## Get Cells Only <span id="get-cells-only"></span>
 
 <div>
 
@@ -665,7 +665,7 @@ style="width:3.36683in;height:2.73299in" />
 
 <div>
 
-## Use with Tablex <span id="Use-with-Tablex"></span>
+## Use with Tablex <span id="use-with-tablex"></span>
 
 <div>
 
@@ -711,7 +711,7 @@ style="width:2.90837in;height:1.24877in" />
 
 <div>
 
-# Data Operation Examples <span id="Data-Operation-Examples"></span>
+# Data Operation Examples <span id="data-operation-examples"></span>
 
 While technically seperate from table display, the following are
 examples of how to perform operations on data before it is displayed
@@ -726,7 +726,7 @@ functionality.
 
 <div>
 
-## CSV Data <span id="CSV-Data"></span>
+## CSV Data <span id="csv-data"></span>
 
 By default, imported CSV gives a “rows” or “array of arrays” data
 format, which can not be directly used by `tabut`. To convert, `tabut`
@@ -796,7 +796,7 @@ perform this process.
 
 <div>
 
-## Slice <span id="Slice"></span>
+## Slice <span id="slice"></span>
 
 <div>
 
@@ -840,7 +840,7 @@ style="width:5.33036in;height:1.49023in" />
 
 <div>
 
-## Sorting and Reversing <span id="Sorting-and-Reversing"></span>
+## Sorting and Reversing <span id="sorting-and-reversing"></span>
 
 <div>
 
@@ -878,7 +878,7 @@ style="width:4.40184in;height:1.49023in" />
 
 <div>
 
-## Filter <span id="Filter"></span>
+## Filter <span id="filter"></span>
 
 <div>
 
@@ -915,7 +915,7 @@ style="width:5.33036in;height:1.49023in" />
 
 <div>
 
-## Aggregation using Map and Sum <span id="Aggregation-using-Map-and-Sum"></span>
+## Aggregation using Map and Sum <span id="aggregation-using-map-and-sum"></span>
 
 <div>
 
@@ -944,7 +944,7 @@ style="width:1.73668in;height:0.53445in" />
 
 <div>
 
-## Grouping <span id="Grouping"></span>
+## Grouping <span id="grouping"></span>
 
 <div>
 
