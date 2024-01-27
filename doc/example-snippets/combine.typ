@@ -1,4 +1,4 @@
-#import "@preview/tabut:0.0.1": tabut
+#import "@preview/tabut:1.0.0": tabut
 
 #let employees = (
     (id: 3251, first: "Alice", last: "Smith", middle: "Jane"),
