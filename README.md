@@ -1,6 +1,6 @@
 <div>
 
-# Tabut <span id="tabut"></span>
+# Tabut
 
 *Powerful, Simple, Concise*
 
@@ -47,6 +47,18 @@ A Typst plugin for turning data into tables.
   - [Aggregation using Map and Sum](#aggregation-using-map-and-sum)
 
   - [Grouping](#grouping)
+
+- [Function Definitions](#function-definitions)
+
+  - [`tabut`](#tabut)
+
+  - [`tabut-cells`](#tabut-cells)
+
+  - [`rows-to-records`](#rows-to-records)
+
+  - [`records-from-csv`](#records-from-csv)
+
+  - [`group`](#group)
 
 </div>
 
@@ -1002,5 +1014,270 @@ style="width:1.53415in;height:1.01133in" />
 style="width:2.21231in;height:1.01133in" />
 
 </div>
+
+</div>
+
+<div>
+
+# Function Definitions <span id="function-definitions"></span>
+
+</div>
+
+<div>
+
+## `tabut` <span id="tabut"></span>
+
+Takes data and column definitions and outputs a table.
+
+<div>
+
+``` typc
+tabut(
+  data-raw, 
+  colDefs, 
+  columns: auto,
+  align: auto,
+  index: "_index",
+  transpose: false,
+  headers: true,
+  ..tableArgs
+) -> content
+```
+
+</div>
+
+### Parameters
+
+`data-raw`  
+This is the raw data that will be used to generate the table. The data
+is expected to be in an array of dictionaries, where each dictionary
+represents a single record or object.
+
+`colDefs`  
+These are the column definitions. An array of dictionaries, each
+representing column definition. Must include the properties `header` and
+a `func`. `header` expects content, and specifies the label of the
+column. `func` expects a function, the function takes a record
+dictionary as input and returns the value to be displayed in the cell
+corresponding to that record and column. There are also two optional
+properties; `align` sets the alignment of the content within the cells
+of the column, `width` sets the width of the column.
+
+`columns`  
+(optional, default: `auto`) Specifies the column widths. If set to
+`auto`, the function automatically generates column widths by each
+column’s column definition. Otherwise functions exactly the `columns`
+paramater of the standard Typst `table` function. Unlike the
+`tabut-cells` setting this to `none` will break.
+
+`align`  
+(optional, default: `auto`) Specifies the column alignment. If set to
+`auto`, the function automatically generates column alignment by each
+column’s column definition. If set to `none` no `align` property is
+added to the output arg. Otherwise functions exactly the `align`
+paramater of the standard Typst `table` function.
+
+`index`  
+(optional, default: `"_index"`) Specifies the property name for the
+index of each record. By default, an `_index` property is automatically
+added to each record. If set to `none`, no index property is added.
+
+`transpose`  
+(optional, default: `false`) If set to `true`, transposes the table,
+swapping rows and columns.
+
+`headers`  
+(optional, default: `true`) Determines whether headers should be
+included in the output. If set to `false`, headers are not generated.
+
+`tableArgs`  
+(optional) Any additional arguments are passed to the `table` function,
+can be used for styling or anything else.
+
+</div>
+
+<div>
+
+## `tabut-cells` <span id="tabut-cells"></span>
+
+The `tabut-cells` function functions as `tabut`, but returns `arguments`
+for use in either the standard `table` function or other tools such as
+`tablex`. If you just want the array of cells, use the `pos` function on
+the returned value, ex `tabut-cells(...).pos`.
+
+`tabut-cells` is particularly useful when you need to generate only the
+cell contents of a table or when these cells need to be passed to
+another function for further processing or customization.
+
+### Function Signature
+
+<div>
+
+``` typc
+tabut-cells(
+  data-raw, 
+  colDefs, 
+  columns: auto,
+  align: auto,
+  index: "_index",
+  transpose: false,
+  headers: true,
+) -> arguments
+```
+
+</div>
+
+### Parameters
+
+`data-raw`  
+This is the raw data that will be used to generate the table. The data
+is expected to be in an array of dictionaries, where each dictionary
+represents a single record or object.
+
+`colDefs`  
+These are the column definitions. An array of dictionaries, each
+representing column definition. Must include the properties `header` and
+a `func`. `header` expects content, and specifies the label of the
+column. `func` expects a function, the function takes a record
+dictionary as input and returns the value to be displayed in the cell
+corresponding to that record and column. There are also two optional
+properties; `align` sets the alignment of the content within the cells
+of the column, `width` sets the width of the column.
+
+`columns`  
+(optional, default: `auto`) Specifies the column widths. If set to
+`auto`, the function automatically generates column widths by each
+column’s column definition. If set to `none` no `column` property is
+added to the output arg. Otherwise functions exactly the `columns`
+paramater of the standard typst `table` function.
+
+`align`  
+(optional, default: `auto`) Specifies the column alignment. If set to
+`auto`, the function automatically generates column alignment by each
+column’s column definition. If set to `none` no `align` property is
+added to the output arg. Otherwise functions exactly the `align`
+paramater of the standard typst `table` function.
+
+`index`  
+(optional, default: `"_index"`) Specifies the property name for the
+index of each record. By default, an `_index` property is automatically
+added to each record. If set to `none`, no index property is added.
+
+`transpose`  
+(optional, default: `false`) If set to `true`, transposes the table,
+swapping rows and columns.
+
+`headers`  
+(optional, default: `true`) Determines whether headers should be
+included in the output. If set to `false`, headers are not generated.
+
+</div>
+
+<div>
+
+## `records-from-csv` <span id="records-from-csv"></span>
+
+Automatically converts a CSV file into an array of records.
+
+<div>
+
+``` typc
+records-from-csv(
+  filename
+) -> array
+```
+
+</div>
+
+### Parameters
+
+`filename`  
+The path to the CSV file that needs to be converted.
+
+This function simplifies the process of converting CSV data into a
+format compatible with `tabut`. It reads the CSV file, extracts the
+headers, and converts each row into a dictionary, using the headers as
+keys.
+
+</div>
+
+<div>
+
+## `rows-to-records` <span id="rows-to-records"></span>
+
+Converts rows of data into an array of records based on specified
+headers.
+
+This function is useful for converting data in a “rows” format (commonly
+found in CSV files) into an array of dictionaries format, which is
+required for `tabut` and allows easy data processing using the built in
+array functions.
+
+<div>
+
+``` typc
+rows-to-records(
+  headers, 
+  rows, 
+  default: none
+) -> array
+```
+
+</div>
+
+### Parameters
+
+`headers`  
+An array representing the headers of the table. Each item in this array
+corresponds to a column header.
+
+`rows`  
+An array of arrays, each representing a row of data. Each sub-array
+contains the cell data for a corresponding row.
+
+`default`  
+(optional, default: `none`) A default value to use when a cell is empty
+or there is an error.
+
+</div>
+
+<div>
+
+## `group` <span id="group"></span>
+
+Groups data based on a specified function and returns an array of
+grouped records.
+
+<div>
+
+``` typc
+group(
+  data, 
+  function
+) -> array
+```
+
+</div>
+
+### Parameters
+
+`data`  
+An array of dictionaries. Each dictionary represents a single record or
+object.
+
+`function`  
+A function that takes a record as input and returns a value based on
+which the grouping is to be performed.
+
+This function iterates over each record in the `data`, applies the
+`function` to determine the grouping value, and organizes the records
+into groups based on this value. Each group record is represented as a
+dictionary with two properties: `value` (the result of the grouping
+function) and `group` (an array of records belonging to this group).
+
+In the context of `tabut`, the `group` function is particularly useful
+for creating summary tables where records need to be categorized and
+aggregated based on certain criteria, such as calculating total or
+average values for each group.
 
 </div>
