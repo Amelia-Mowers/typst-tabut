@@ -1,3 +1,17 @@
+#let col(
+  header,
+  function,
+  width: auto,
+  align: auto,
+) = {
+  (
+    header: header,
+    func: function,
+    width: width,
+    align: align,
+  )
+}
+
 #let tabut-cells(
   data-raw, 
   colDefs, 
