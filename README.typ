@@ -390,18 +390,20 @@ tabut-cells(
 
 #subsection([`records-from-csv`])
 
-Automatically converts a CSV file into an array of records.
+Automatically converts a CSV data into an array of records.
 
 #ex(```typc
 records-from-csv(
-  filename
+  data
 ) -> array
 ```)
 
 === Parameters
-/ `filename`: The path to the CSV file that needs to be converted.
+/ `data`: The CSV data that needs to be converted, this can be obtained using the native `csv` function, like `records-from-csv(csv(file-path))`.
 
-This function simplifies the process of converting CSV data into a format compatible with `tabut`. It reads the CSV file, extracts the headers, and converts each row into a dictionary, using the headers as keys. 
+This function simplifies the process of converting CSV data into a format compatible with `tabut`. It reads the CSV data, extracts the headers, and converts each row into a dictionary, using the headers as keys.
+
+It also automatically converts data into floats or integers when possible.
 
 ]) #no-break([
 
