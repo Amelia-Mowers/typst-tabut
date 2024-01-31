@@ -162,9 +162,9 @@
   input
 }
 
-#let records-from-csv(filename) = {
+#let records-from-csv(input) = {
   let data = {
-    let data-raw = csv(filename);
+    let data-raw = input;
     rows-to-records(data-raw.first(), data-raw.slice(1, -1))
   }
   data.map( r => {

@@ -1,6 +1,6 @@
 [package]
 name = "tabut"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Amelia Mowers <https://github.com/Amelia-Mowers>"]
 license = "MIT"
 description = "Display data as tables."
