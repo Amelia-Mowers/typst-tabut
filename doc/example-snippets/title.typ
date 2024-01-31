@@ -1,4 +1,4 @@
-#import "@preview/tabut:1.0.0": tabut
+#import "@preview/tabut:1.0.1": tabut
 #import "example-data/supplies.typ": supplies
 
 #let fmt(it) = {

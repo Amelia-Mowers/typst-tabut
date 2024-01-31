@@ -1,4 +1,4 @@
-#import "@preview/tabut:1.0.0": tabut, rows-to-records
+#import "@preview/tabut:1.0.1": tabut, rows-to-records
 #import "example-data/supplies.typ": supplies
 
 #let titanic = {

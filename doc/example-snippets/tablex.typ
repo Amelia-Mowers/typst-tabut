@@ -1,4 +1,4 @@
-#import "@preview/tabut:1.0.0": tabut-cells
+#import "@preview/tabut:1.0.1": tabut-cells
 #import "usd.typ": usd
 #import "example-data/supplies.typ": supplies
 
