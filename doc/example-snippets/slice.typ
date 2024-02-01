@@ -1,4 +1,4 @@
-#import "@preview/tabut:1.0.1": tabut, records-from-csv
+#import "@preview/tabut:<<VERSION>>": tabut, records-from-csv
 #import "usd.typ": usd
 #import "example-data/titanic.typ": titanic
 

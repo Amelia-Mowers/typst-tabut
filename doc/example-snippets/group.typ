@@ -1,4 +1,4 @@
-#import "@preview/tabut:1.0.1": tabut, group
+#import "@preview/tabut:<<VERSION>>": tabut, group
 #import "example-data/titanic.typ": titanic, classes
 
 #tabut(

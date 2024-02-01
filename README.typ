@@ -12,6 +12,7 @@
 }
 
 #let snippet(filename) = {[
+  #let version = toml("typst.toml").package.version;
   #let snippet-code-path = "doc/example-snippets/" + filename + ".typ"
   #let snippet-image-path = "doc/compiled-snippets/" + filename + ".svg"
 
@@ -21,14 +22,15 @@
     width: float(data.attrs.width) * 1pt,
   );
 
-  #let content = read(snippet-code-path).replace("\r", "")
+  #let content = read(snippet-code-path).replace("\r", "").replace("<<VERSION>>", version)
   #ex(raw(content, block: true, lang: "typ"))
   #ex(image(snippet-image-path, ..size))
 ]}
 
 #let snippet-quiet(filename) = {[
+  #let version = toml("typst.toml").package.version;
   #let snippet-code-path = "doc/example-snippets/" + filename + ".typ"
-  #let content = read(snippet-code-path).replace("\r", "")
+  #let content = read(snippet-code-path).replace("\r", "").replace("<<VERSION>>", version)
   #ex(raw(content, block: true, lang: "typ"))
 ]}
 

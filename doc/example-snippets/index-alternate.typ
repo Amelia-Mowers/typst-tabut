@@ -1,4 +1,4 @@
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:<<VERSION>>": tabut
 #import "example-data/supplies.typ": supplies
 
 #tabut(

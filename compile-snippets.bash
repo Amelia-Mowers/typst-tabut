@@ -4,6 +4,16 @@
 SOURCE_DIR="$PWD/doc/example-snippets"
 DEST_DIR="$PWD/doc/compiled-snippets"
 TMP_DIR="/dev/shm/my_temp_dir"
+#DEST_DIR="$PWD/doc/tmp"
+
+# Read the version number from typst.toml
+VERSION=$(grep '^version' "$PWD/typst.toml" | cut -d '"' -f2)
+
+# Check if VERSION is empty
+if [ -z "$VERSION" ]; then
+    echo "Version not found in typst.toml"
+    exit 1
+fi
 
 # Create and setup the temporary directory
 mkdir -p "$TMP_DIR"
@@ -17,33 +27,45 @@ else
     rm -rf "${DEST_DIR:?}"/*
 fi
 
-# Loop through each .typ file in the temporary directory
-for file in "$TMP_DIR"/*.typ; do
-    if [ -f "$file" ]; then
-        # Extract the filename without the extension
-        filename=$(basename "${file%.*}")
+# Preprocessing step
+find "$SOURCE_DIR" -type f -name '*.typ' | while read -r file; do
+    # Get the relative path from SOURCE_DIR
+    relative_path="${file#$SOURCE_DIR/}"
+    relative_dir=$(dirname "$relative_path")
+    filename=$(basename "${file%.*}")
 
-        # Output the name of the file being processed
-        echo "Processing file: $filename.typ"
+    # Create corresponding subdirectory in temporary directory
+    mkdir -p "$TMP_DIR/$relative_dir"
 
-        # Create a new temporary file for compilation in the same directory
-        temp_file="$TMP_DIR/$filename.temp"
+    # Define the path for the temporary file
+    temp_file="$TMP_DIR/$relative_path"
 
-        # Prepend the required string to the new temp file
-        echo "#set page(background: box(width: 100%, height: 100%, fill: luma(97%)), width: auto, height: auto, margin: 2pt)" > "$temp_file"
+    echo "Pre-processing file: $relative_path"
 
-        # Append the contents of the original file to the new temp file
-        cat "$file" >> "$temp_file"
+    # Prepend the required string to the new temp file
+    echo "#set page(background: box(width: 100%, height: 100%, fill: luma(97%)), width: auto, height: auto, margin: 2pt)" > "$temp_file"
 
-        # Compile the new temp file to SVG format
-        typst compile "$temp_file" "$DEST_DIR/$filename.svg"
+    # Append the contents of the original file to the new temp file, replacing "<<VERSION>>" with the actual version number
+    sed "s/<<VERSION>>/$VERSION/g" "$file" >> "$temp_file"
+done
 
-        # Remove the new temporary file
-        rm "$temp_file"
-    fi
+# Compilation step
+find "$TMP_DIR" -type f -name '*.typ' | while read -r temp_file; do
+    # Get the relative path from TMP_DIR
+    relative_path="${temp_file#$TMP_DIR/}"
+    relative_dir=$(dirname "$relative_path")
+    filename=$(basename "${temp_file%.*}")
+
+    # Ensure the destination subdirectory exists
+    mkdir -p "$DEST_DIR/$relative_dir"
+
+    echo "Compiling file: $relative_path"
+
+    # Compile the temp file to SVG format
+    typst compile "$temp_file" "$DEST_DIR/$relative_dir/$filename.svg"
 done
 
 # Clean up: remove the temporary directory and its contents
-rm -rf "$TMP_DIR"
+# rm -rf "$TMP_DIR"
 
 echo "All files have been processed."
