@@ -165,7 +165,7 @@
 #let records-from-csv(input) = {
   let data = {
     let data-raw = input;
-    rows-to-records(data-raw.first(), data-raw.slice(1, -1))
+    rows-to-records(data-raw.first(), data-raw.slice(1))
   }
   data.map( r => {
     let new-record = (:);
