@@ -102,7 +102,7 @@ Now create a basic table from the data.
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "example-data/supplies.typ": supplies
 
 #tabut(
@@ -145,7 +145,7 @@ for example:
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "example-data/supplies.typ": supplies
 
 #tabut(
@@ -180,7 +180,7 @@ final table function.
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "example-data/supplies.typ": supplies
 
 #tabut(
@@ -215,7 +215,7 @@ You can pass any content or expression into the header property.
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "example-data/supplies.typ": supplies
 
 #let fmt(it) = {
@@ -259,7 +259,7 @@ section.
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "example-data/supplies.typ": supplies
 
 #tabut(
@@ -296,7 +296,7 @@ any content in Typst.
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "usd.typ": usd
 #import "example-data/supplies.typ": supplies
 
@@ -330,7 +330,7 @@ property.
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "usd.typ": usd
 #import "example-data/supplies.typ": supplies
 
@@ -365,7 +365,7 @@ Or even combine multiple record properties, go wild.
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 
 #let employees = (
     (id: 3251, first: "Alice", last: "Smith", middle: "Jane"),
@@ -404,7 +404,7 @@ style="width:1.6171in;height:1.01133in" />
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "example-data/supplies.typ": supplies
 
 #tabut(
@@ -434,7 +434,7 @@ as shown below.
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "example-data/supplies.typ": supplies
 
 #tabut(
@@ -470,7 +470,7 @@ this, but here.
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "usd.typ": usd
 #import "example-data/supplies.typ": supplies
 
@@ -506,7 +506,7 @@ style="width:3.57327in;height:1.01335in" />
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "usd.typ": usd
 #import "example-data/supplies.typ": supplies
 
@@ -538,7 +538,7 @@ Function.
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "usd.typ": usd
 #import "example-data/supplies.typ": supplies
 
@@ -574,7 +574,7 @@ style="width:2.56141in;height:1.01133in" />
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "usd.typ": usd
 #import "example-data/supplies.typ": supplies
 
@@ -610,7 +610,7 @@ Function.
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "usd.typ": usd
 #import "example-data/supplies.typ": supplies
 
@@ -650,7 +650,7 @@ style="width:4.22222in;height:1.01133in" />
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut-cells
+#import "@preview/tabut:1.0.2": tabut-cells
 #import "usd.typ": usd
 #import "example-data/supplies.typ": supplies
 
@@ -682,7 +682,7 @@ style="width:3.36683in;height:2.73299in" />
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut-cells
+#import "@preview/tabut:1.0.2": tabut-cells
 #import "usd.typ": usd
 #import "example-data/supplies.typ": supplies
 
@@ -747,7 +747,7 @@ includes a function `rows-to-records` demonstrated below.
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut, rows-to-records
+#import "@preview/tabut:1.0.2": tabut, rows-to-records
 #import "example-data/supplies.typ": supplies
 
 #let titanic = {
@@ -767,7 +767,7 @@ Imported CSV data are all strings, so it’s usefull to convert them to
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut, rows-to-records
+#import "@preview/tabut:1.0.2": tabut, rows-to-records
 #import "example-data/supplies.typ": supplies
 
 #let auto-type(input) = {
@@ -797,7 +797,7 @@ perform this process.
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": records-from-csv
+#import "@preview/tabut:1.0.2": records-from-csv
 
 #let titanic = records-from-csv(csv("example-data/titanic.csv"));
 ```
@@ -813,7 +813,7 @@ perform this process.
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut, records-from-csv
+#import "@preview/tabut:1.0.2": tabut, records-from-csv
 #import "usd.typ": usd
 #import "example-data/titanic.typ": titanic
 
@@ -857,7 +857,7 @@ style="width:5.33036in;height:1.49023in" />
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "usd.typ": usd
 #import "example-data/titanic.typ": titanic, classes
 
@@ -895,7 +895,7 @@ style="width:4.40184in;height:1.49023in" />
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut
+#import "@preview/tabut:1.0.2": tabut
 #import "usd.typ": usd
 #import "example-data/titanic.typ": titanic, classes
 
@@ -961,7 +961,7 @@ style="width:1.73668in;height:0.53445in" />
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut, group
+#import "@preview/tabut:1.0.2": tabut, group
 #import "example-data/titanic.typ": titanic, classes
 
 #tabut(
@@ -987,7 +987,7 @@ style="width:1.53415in;height:1.01133in" />
 <div>
 
 ``` typ
-#import "@preview/tabut:1.0.1": tabut, group
+#import "@preview/tabut:1.0.2": tabut, group
 #import "usd.typ": usd
 #import "example-data/titanic.typ": titanic, classes
 
